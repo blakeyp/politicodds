@@ -14,10 +14,11 @@ class EventPicker extends React.Component {
   render() {
     return (
       <div style={{paddingBottom: '30px'}}>
-        <label for='event'>Choose an event:</label>
+        <label htmlFor='event'>Choose an event:</label>
         <select id='event' value={this.props.event} onChange={this.handleChange}>
-          <option value='1234'>Event 1234</option>
-          <option value='5678'>Event 5678</option>
+          {this.props.events.map((event) => (
+            <option key={event.id} value={event.id}>{event.name}</option>
+          ))}
         </select>
       </div>
     )

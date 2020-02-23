@@ -7,13 +7,17 @@ class OddsTable extends React.Component {
   render() {
     return (
     <table>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-      </tr>
-      {runnerOddsByEventId[this.props.event].map((runner) => (
-        <OddsTableRow name={runner.name} price={runner.price}/>
-      ))}
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {runnerOddsByEventId[this.props.event].map((runner, index) => (
+          <OddsTableRow key={index} name={runner.name} price={runner.price} />
+        ))}
+      </tbody>
     </table>
     )
   }

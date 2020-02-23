@@ -5,23 +5,36 @@ import OddsTable from './OddsTable'
 class EventOddsTablePicker extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { event: '5678' }
+    this.state = {
+      events: [],
+      selectedEvent: '01'
+    }
 
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({ event })
+  handleChange(selectedEvent) {
+    this.setState({ selectedEvent })
+  }
+
+  componentDidMount() {
+    fetch('api/events')
+    .then(res => res.json())
+    .then(data => {
+      this.setState({ events: data })
+    })
+    .catch(console.error)
   }
 
   render() {
     return (
       <div>
         <EventPicker
-          event={this.state.event}
+          events={this.state.events} 
+          event={this.state.selectedEvent}
           onChange={this.handleChange} />
         <OddsTable
-          event={this.state.event} />
+          event={this.state.selectedEvent} />
       </div>
     )
   }
