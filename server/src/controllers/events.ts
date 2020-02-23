@@ -1,6 +1,10 @@
 const eventsController = {
   get: (req, res) => {
-    res.send('Events GET')
+    res.json([
+      { id: '01', name: 'Event 1' },
+      { id: '02', name: 'Event 2' },
+      { id: '03', name: 'Event 3' }
+    ])
   }
 }
 
