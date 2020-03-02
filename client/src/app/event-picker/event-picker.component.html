@@ -1,0 +1,6 @@
+<div style='padding-bottom: 30px'>
+  <label for='event'>Choose an event:</label>
+  <select id='event'>
+      <option *ngFor='let event of events' [value]='event.value'>{{ event.name }}</option>
+  </select>
+</div>
