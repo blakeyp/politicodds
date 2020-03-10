@@ -6,7 +6,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor='let runner of runners'>
+    <tr *ngFor='let runner of runnerOddsByEventId[this.eventId]'>
       <td>{{ runner.name }}</td>
       <td>{{ runner.price }}</td>
     </tr>

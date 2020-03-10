@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { Input } from '@angular/core'
+import { runnerOddsByEventId } from '../../data'
 
 @Component({
   selector: 'app-odds-table',
@@ -6,20 +8,14 @@ import { Component, OnInit } from '@angular/core';
   // styleUrls: ['./odds-table.component.scss']
 })
 export class OddsTableComponent implements OnInit {
-  runners = [
-    {
-      name: 'Runner 1',
-      price: '5'
-    },
-    {
-      name: 'Runner 2',
-      price: '1.3'
-    }
-  ];
+  @Input() eventId
 
-  constructor() { }
+  runnerOddsByEventId
 
-  ngOnInit() {
+  constructor() {
+    this.runnerOddsByEventId = runnerOddsByEventId
   }
+
+  ngOnInit() {}
 
 }

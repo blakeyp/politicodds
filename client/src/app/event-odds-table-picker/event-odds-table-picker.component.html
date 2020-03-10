@@ -1,4 +1,10 @@
 <div>
-  <app-event-picker></app-event-picker>
-  <app-odds-table></app-odds-table>
+  <app-event-picker
+    (selectEvent)="onSelectEvent($event)"
+    [eventId]="eventId"
+    [events]="events">
+  </app-event-picker>
+  <app-odds-table
+    [eventId]="eventId"
+  ></app-odds-table>
 </div>

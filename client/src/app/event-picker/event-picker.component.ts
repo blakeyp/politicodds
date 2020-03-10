@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
   selector: 'app-event-picker',
@@ -6,20 +7,12 @@ import { Component, OnInit } from '@angular/core';
   // styleUrls: ['./event-picker.component.scss']
 })
 export class EventPickerComponent implements OnInit {
-  events = [
-    {
-      name: 'Event 1',
-      value: '1234'
-    },
-    {
-      name: 'Event 2',
-      value: '2345'
-    }
-  ];
+  @Input() eventId
+  @Input() events
+  @Output() selectEvent = new EventEmitter()
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
