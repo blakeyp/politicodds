@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-event-odds-table-picker',
@@ -6,28 +7,26 @@ import { Component, OnInit } from '@angular/core'
   // styleUrls: ['./event-odds-table-picker.component.scss']
 })
 export class EventOddsTablePickerComponent implements OnInit {
+  apiService: ApiService
   eventId: string
   events: object[]
 
-  constructor() {
+  constructor(apiService: ApiService) {
+    this.apiService = apiService;
     this.eventId = '02'
-    this.events = [
-      {
-        name: 'Event 1',
-        id: '01'
-      },
-      {
-        name: 'Event 2',
-        id: '02'
-      },
-      {
-        name: 'Event 3',
-        id: '03'
-      }
-    ]
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getEvents();
+  }
+
+  getEvents() {
+    this.events = [];
+    this.apiService.getEvents().subscribe((data: {}) => {
+      console.log(data);
+      this.events = data as object[];
+    });
+  }
 
   onSelectEvent(event) {
     this.eventId = event.target.value
