@@ -1,27 +1,33 @@
 {
   "name": "politicodds-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend REST API for political betting data",
+  "repository": "github:blakeyp/politicodds",
   "main": "dist/server.js",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "build": "tsc",
-    "start": "node dist/src/server.js",
-    "debug": "node --inspect dist/src/server.js",
-    "test": "jest --coverage --collectCoverageFrom=src/**/*"
+    "start": "tsc && node dist/server.js",
+    "debug": "tsc && node --inspect dist/server.js",
+    "test": "jest",
+    "coverage": "jest --coverage --collectCoverageFrom='src/**/*.ts'"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-push": "npm run lint && npm run test"
     }
   },
-  "author": "",
+  "author": "blakeyp",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.6",
     "@types/jest": "^25.1.1",
+    "@types/node": "^13.9.8",
     "@typescript-eslint/eslint-plugin": "^2.17.0",
     "eslint": "^6.8.0",
     "eslint-config-standard-with-typescript": "^11.0.1",
@@ -31,7 +37,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.0.10",
     "jest": "^25.1.0",
-    "ts-jest": "^25.1.0",
+    "ts-jest": "^25.3.0",
     "typescript": "^3.7.5"
   }
 }
