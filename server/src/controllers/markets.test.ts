@@ -1,11 +1,11 @@
-import { getAllMarkets, getMarketById } from './markets'
+import { getMarket, getMarketsByEvent } from './markets'
 import { marketsService } from '../services'
 import MarketsService from '../services/MarketsService'
 
 jest.mock('../services', () => {
   return {
     marketsService: {
-      getMarkets: jest.fn()
+      getByEvent: jest.fn()
     }
   }
 })
@@ -24,23 +24,29 @@ describe('Markets controller', () => {
     jest.resetAllMocks()
   })
 
-  describe('getAllMarkets handler', () => {
-    test('responds with the list of all markets', async () => {
+  describe('getMarketsByEvent handler', () => {
+    test('responds with list of markets for the given event id', async () => {
+      const mockEventId = Symbol('mockEventId')
+      req = {
+        params: {
+          id: mockEventId
+        }
+      }
       const mockMarkets = [
         { id: '01', name: 'Market 1' },
         { id: '02', name: 'Market 2' },
         { id: '03', name: 'Market 3' }
       ]
-      mockMarketsService.getMarkets.mockResolvedValue(mockMarkets)
+      mockMarketsService.getByEvent.mockResolvedValue(mockMarkets)
 
-      await getAllMarkets(req, res)
+      await getMarketsByEvent(req, res)
 
       expect(res.json).toHaveBeenCalledWith(mockMarkets)
     })
   })
 
-  describe('getMarketById handler', () => {
-    it('responds with the market details for the given id', async () => {
+  describe('getMarket handler', () => {
+    it('responds with market details for the given id', async () => {
       const mockMarketId = Symbol('mockMarketId')
       req = {
         params: {
@@ -48,7 +54,7 @@ describe('Markets controller', () => {
         }
       }
 
-      await getMarketById(req, res)
+      await getMarket(req, res)
 
       expect(res.json).toHaveBeenCalledWith({
         id: mockMarketId,

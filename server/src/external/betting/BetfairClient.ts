@@ -1,12 +1,26 @@
-import BettingClient, { Market } from './BettingClient'
+import BettingClient, { Market, Event } from './BettingClient'
 import HttpClient from '../http/HttpClient'
 
-// Betfair listMarketCatalogue response
+// Betfair responses
 // @Todo: Move somewhere more sensible
 type MarketResponse = Array<{
   marketId: string
   marketName: string
+  // ...
 }>
+type EventResponse = Array<{
+  event: {
+    id: string
+    name: string
+    countryCode: string
+    // ...
+  }
+  marketCount: number
+}>
+
+enum EventType {
+  Politics = '2378961'
+}
 
 class BetfairClient implements BettingClient {
   constructor (
@@ -16,16 +30,35 @@ class BetfairClient implements BettingClient {
     private readonly http: HttpClient
   ) {}
 
-  async getPoliticsMarkets (): Promise<Market[]> {
+  async getPoliticsEvents (): Promise<Event[]> {
     const body = {
       filter: {
-        eventTypeIds: ['2378961']
+        eventTypeIds: [EventType.Politics]
       },
-      maxResults: '30'
+      maxResults: '1000'
+    }
+
+    const data: EventResponse = await this.callApi('listEvents', body)
+    const events: Event[] = data.map(item => ({
+      id: item.event.id,
+      name: item.event.name,
+      country: item.event.countryCode,
+      numberOfMarkets: item.marketCount
+    }))
+
+    return events
+  }
+
+  async getMarketsByEvent (eventId: string): Promise<Market[]> {
+    const body = {
+      filter: {
+        eventIds: [eventId]
+      },
+      maxResults: '1000'
     }
 
     const data: MarketResponse = await this.callApi('listMarketCatalogue', body)
-    const markets = data.map(item => ({
+    const markets: Market[] = data.map(item => ({
       id: item.marketId,
       name: item.marketName
     }))

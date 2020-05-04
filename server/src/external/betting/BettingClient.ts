@@ -1,3 +1,10 @@
+export interface Event {
+  id: string
+  name: string
+  country?: string
+  numberOfMarkets?: number
+}
+
 export interface Market {
   id: string
   name: string
@@ -18,7 +25,8 @@ interface Odds {
 }
 
 export default interface BettingClient {
-  getPoliticsMarkets (): Promise<Market[]>
+  getPoliticsEvents (): Promise<Event[]>
+  getMarketsByEvent (eventId: string): Promise<Market[]>
   // getMarketDetails (marketId: string): Promise<MarketDetails>
   // getRunnersForMarket (marketId: string): Promise<Runner[]>
   // getOddsForMarket (marketId: string): Promise<Odds[]>

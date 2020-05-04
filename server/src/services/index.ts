@@ -1,10 +1,11 @@
+import EventsService from './EventsService'
 import MarketsService from './MarketsService'
 import { betfairClient } from '../external/betting'
 
-const marketsService = new MarketsService(
-  betfairClient
-)
+const eventsService = new EventsService(betfairClient)
+const marketsService = new MarketsService(betfairClient)
 
 export {
+  eventsService,
   marketsService
 }

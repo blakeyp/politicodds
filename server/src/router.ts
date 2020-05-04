@@ -1,9 +1,12 @@
 import express from 'express'
-import * as marketsController from './controllers/markets'
+import { getEvents } from './controllers/events'
+import { getMarketsByEvent, getMarket } from './controllers/markets'
 
 const router = express.Router()
 
-router.get('/markets', marketsController.getAllMarkets)
-router.get('/markets/:id', marketsController.getMarketById)
+router.get('/events', getEvents)
+router.get('/events/:id/markets', getMarketsByEvent)
+// router.get('/markets', getMarkets)
+router.get('/markets/:id', getMarket)
 
 export default router

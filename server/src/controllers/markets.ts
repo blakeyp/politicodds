@@ -1,12 +1,14 @@
 import { Request, Response } from 'express'
 import { marketsService } from '../services'
 
-export const getAllMarkets = async (req: Request, res: Response): Promise<void> => {
-  const markets = await marketsService.getMarkets()
+export const getMarketsByEvent = async (req: Request, res: Response): Promise<void> => {
+  const eventId = req.params.id
+  const markets = await marketsService.getByEvent(eventId)
   res.json(markets)
 }
 
-export const getMarketById = (req: Request, res: Response): void => {
+// eslint-disable-next-line @typescript-eslint/require-await
+export const getMarket = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id
   res.json({
     id,
