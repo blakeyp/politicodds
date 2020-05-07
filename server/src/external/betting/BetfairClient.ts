@@ -1,14 +1,15 @@
-import BettingClient, { Market, Event } from './BettingClient'
+import BettingClient from './BettingClient'
 import HttpClient from '../http/HttpClient'
+import { Market, Event } from './types'
 
 // Betfair responses
 // @Todo: Move somewhere more sensible
-type MarketResponse = Array<{
+type MarketsResponse = Array<{
   marketId: string
   marketName: string
   // ...
 }>
-type EventResponse = Array<{
+type EventsResponse = Array<{
   event: {
     id: string
     name: string
@@ -38,7 +39,7 @@ class BetfairClient implements BettingClient {
       maxResults: '1000'
     }
 
-    const data: EventResponse = await this.callApi('listEvents', body)
+    const data: EventsResponse = await this.callApi('listEvents', body)
     const events: Event[] = data.map(item => ({
       id: item.event.id,
       name: item.event.name,
@@ -57,7 +58,7 @@ class BetfairClient implements BettingClient {
       maxResults: '1000'
     }
 
-    const data: MarketResponse = await this.callApi('listMarketCatalogue', body)
+    const data: MarketsResponse = await this.callApi('listMarketCatalogue', body)
     const markets: Market[] = data.map(item => ({
       id: item.marketId,
       name: item.marketName

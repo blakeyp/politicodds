@@ -1,4 +1,5 @@
-import BettingClient, { Event } from '../external/betting/BettingClient'
+import { BettingClient } from '../external/betting'
+import { Event } from '../external/betting/types'
 
 class EventsService {
   constructor (

@@ -1,4 +1,5 @@
-import BettingClient, { Market } from '../external/betting/BettingClient'
+import { BettingClient } from '../external/betting'
+import { Market } from '../external/betting/types'
 
 class MarketsService {
   constructor (
