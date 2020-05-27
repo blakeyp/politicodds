@@ -1,7 +1,7 @@
 import config from '../../config'
 import { httpClient } from '../http'
 import BettingClient from './BettingClient'
-import BetfairClient from './BetfairClient'
+import BetfairClient from './betfair/BetfairClient'
 
 const betfairClient = new BetfairClient(
   config.betfair.apiUrl,

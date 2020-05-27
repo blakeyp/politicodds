@@ -14,12 +14,18 @@ interface MarketDetails extends Market {
   foo: string
 }
 
-interface Runner {
-  id: string
+export interface Runner {
+  id: number
   name: string
 }
 
-interface Odds {
-  runnerId: string
-  price: string
+export interface Price {
+  runnerId: number
+  price: number
+}
+
+export interface RunnerOdds {
+  runnerName: string
+  odds: string // Fractional value
+  probability: number // Implied prob. (decimal)
 }
