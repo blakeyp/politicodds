@@ -1,11 +1,11 @@
-import { Event, Market } from './types'
+import { Event, Market, Runner, Price } from './../../domain/types'
 
 interface BettingClient {
   getPoliticsEvents (): Promise<Event[]>
   getMarketsByEvent (eventId: string): Promise<Market[]>
   // getMarketDetails (marketId: string): Promise<MarketDetails>
-  // getRunnersForMarket (marketId: string): Promise<Runner[]>
-  // getOddsForMarket (marketId: string): Promise<Odds[]>
+  getRunnersByMarket (marketId: string): Promise<Runner[]>
+  getPricesByMarket (marketId: string): Promise<Price[]>
 }
 
 export default BettingClient
