@@ -6,7 +6,7 @@
   "main": "dist/server.js",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
     "start": "node dist/server.js",
     "watch": "tsc-watch --onSuccess \"npm run start\"",
     "debug": "tsc && node --inspect dist/server.js",
@@ -38,6 +38,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^4.0.10",
     "jest": "^25.1.0",
+    "rimraf": "^3.0.2",
     "ts-jest": "^25.3.0",
     "tsc-watch": "^4.2.8",
     "typescript": "^3.7.5"
