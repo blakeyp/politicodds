@@ -82,8 +82,7 @@ class BetfairClient implements BettingClient {
 
     const data: MarketBookResponse = await this.callApi(ApiMethod.listMarketBook, body)
 
-    // Todo: sort odds by price as order is not always consistent
-    const odds: Price[] = data[0].runners.map(runner => {
+    const prices: Price[] = data[0].runners.map(runner => {
       const backBets = runner.ex.availableToBack
       const price = Math.max(...backBets.map(bet => bet.price))
       return {
@@ -92,7 +91,7 @@ class BetfairClient implements BettingClient {
       }
     })
 
-    return odds
+    return prices
   }
 
   private async callApi (method: ApiMethod, body: object): Promise<any> {

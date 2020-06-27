@@ -15,7 +15,7 @@ describe('Betfair API client', () => {
   )
 
   afterEach(() => {
-    jest.resetAllMocks()
+    jest.clearAllMocks()
   })
 
   describe('getPoliticsEvents', () => {

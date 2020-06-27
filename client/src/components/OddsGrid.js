@@ -21,12 +21,11 @@ class OddsGrid extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`api/markets/${marketId_nextLibDemLeader}/odds`)
+    fetch(`api/markets/${marketId_nextLibDemLeader}/odds?limit=10`)
       .then(res => res.json())
       .then(data => {
-        const odds = data.slice(0, 8)
-        odds.map(odd => odd.probability = (odd.probability * 100).toFixed(1))
-        this.setState({ odds: odds })
+        data.map(odds => odds.probability = (odds.probability * 100).toFixed(1))
+        this.setState({ odds: data })
       })
       .catch(console.error)
   }
