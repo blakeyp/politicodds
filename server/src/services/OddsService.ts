@@ -13,8 +13,8 @@ class OddsService {
 
     // @Todo: encapsulate all logic in a RunnerOdds class incl. sort/slice (?)
     let runnerOdds: RunnerOdds[] = runners.map(runner => {
-      const price = prices.find(r => r.runnerId === runner.id).price
-      const odds = new Odds(price)
+      const price = prices.find(r => r.runnerId === runner.id)?.price
+      const odds = new Odds(price as number)
       return {
         runnerName: runner.name,
         odds: odds.toFractional(),

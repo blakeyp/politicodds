@@ -10,7 +10,8 @@ describe('Odds value object', () => {
 
   describe('toFractional', () => {
     describe('converts the odds to fractional format', () => {
-      const testCases = [
+      type TestCase = [number, string];
+      const testCases: TestCase[] = [
         // input, expected
         [1, '1/100'],
         [2.06, '11/10'],
@@ -24,7 +25,7 @@ describe('Odds value object', () => {
         [1.03, '1/33']
       ]
 
-      test.each(testCases)('maps %f to \'%s\'', (input: number, expected: string) => {
+      test.each<TestCase>(testCases)('maps %f to \'%s\'', (input: number, expected: string) => {
         const actual = new Odds(input).toFractional()
         expect(actual).toBe(expected)
       })

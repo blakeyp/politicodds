@@ -9,7 +9,7 @@ class Odds {
   toFractional (): string {
     const keys = [...decimalToFractionalMap.keys()]
     const closestKey = math.findClosestNumberInArray(keys, this.decimalValue)
-    return decimalToFractionalMap.get(closestKey)
+    return decimalToFractionalMap.get(closestKey) as string
   }
 
   toImpliedProbability (): number {

@@ -7,16 +7,21 @@ export type EventsResponse = Array<{
   marketCount: number
 }>
 
-export type MarketCatalogueResponse = Array<{
+export type MarketsResponse = Array<{
   marketId: string
   marketName: string
-  runners?: Array<{
+}>
+
+export type RunnersResponse = Array<{
+  marketId: string
+  marketName: string
+  runners: Array<{
     selectionId: number
     runnerName: string
   }>
 }>
 
-export type MarketBookResponse = Array<{
+export type OddsResponse = Array<{
   marketId: string
   runners: Array<{
     selectionId: number

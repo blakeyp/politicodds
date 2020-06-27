@@ -1,7 +1,7 @@
 import BettingClient from '../BettingClient'
 import HttpClient from '../../http/HttpClient'
 import { Event, Market, Runner, Price } from '../../../domain/types'
-import { EventsResponse, MarketCatalogueResponse, MarketBookResponse } from './types'
+import { EventsResponse, MarketsResponse, OddsResponse, RunnersResponse } from './types'
 import { EventType, ApiMethod } from './enums'
 
 class BetfairClient implements BettingClient {
@@ -40,7 +40,7 @@ class BetfairClient implements BettingClient {
       maxResults: '1000'
     }
 
-    const data: MarketCatalogueResponse = await this.callApi(ApiMethod.listMarketCatalogue, body)
+    const data: MarketsResponse = await this.callApi(ApiMethod.listMarketCatalogue, body)
 
     const markets: Market[] = data.map(item => ({
       id: item.marketId,
@@ -59,7 +59,7 @@ class BetfairClient implements BettingClient {
       marketProjection: ['RUNNER_DESCRIPTION']
     }
 
-    const data: MarketCatalogueResponse = await this.callApi(ApiMethod.listMarketCatalogue, body)
+    const data: RunnersResponse = await this.callApi(ApiMethod.listMarketCatalogue, body)
 
     const runners: Runner[] = data[0].runners.map(item => ({
       id: item.selectionId,
@@ -80,7 +80,7 @@ class BetfairClient implements BettingClient {
       matchProjection: 'ROLLED_UP_BY_AVG_PRICE'
     }
 
-    const data: MarketBookResponse = await this.callApi(ApiMethod.listMarketBook, body)
+    const data: OddsResponse = await this.callApi(ApiMethod.listMarketBook, body)
 
     const prices: Price[] = data[0].runners.map(runner => {
       const backBets = runner.ex.availableToBack
