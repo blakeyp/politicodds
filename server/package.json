@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Backend REST API for political betting data",
   "repository": "github:blakeyp/politicodds",
+  "author": "blakeyp",
+  "license": "ISC",
   "main": "dist/server.js",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
@@ -11,15 +13,13 @@
     "watch": "tsc-watch --onSuccess \"npm run start\"",
     "debug": "tsc && node --inspect dist/server.js",
     "test": "jest",
-    "coverage": "jest --coverage --collectCoverageFrom='src/**/*.ts'"
+    "coverage": "jest --coverage"
   },
   "husky": {
     "hooks": {
       "pre-push": "npm run lint && npm run test"
     }
   },
-  "author": "blakeyp",
-  "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
