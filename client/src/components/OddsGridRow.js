@@ -13,11 +13,18 @@ const useStyles = theme => ({
     fontWeight: 500,
     textAlign: 'center'
   },
+  runnerLabel: {
+    fontSize: '130%'
+  },
   percentGridItem: {
     // Eliminate top padding on mobile to 'group' collapsed rows
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: '0 !important'
     },
+  },
+  percentBarContainer: {
+    display: 'inline-block',
+    width: '85%'
   },
   percentBar: {
     backgroundColor: '#C1E2EC',
@@ -25,7 +32,8 @@ const useStyles = theme => ({
     height: 25,
     verticalAlign: 'middle'
   },
-  percentText: {
+  percentLabel: {
+    position: 'absolute',
     marginLeft: theme.spacing(1),
     verticalAlign: 'middle'
   }
@@ -36,21 +44,23 @@ class OddsGridRow extends React.Component {
     const { classes } = this.props
     return (
       <React.Fragment>
-        <Grid item xs={10} sm={3}>
-        <Typography variant="subtitle1" style={{ fontSize: '130%' }}>
+        <Grid item xs={10} md={3}>
+        <Typography variant="subtitle1" className={classes.runnerLabel}>
           {this.props.runnerName}
         </Typography>
         </Grid>
-        <Grid item xs={2} sm={1}>
+        <Grid item xs={2} md={1}>
           <Paper elevation={0} className={classes.oddsPaper}>
             {this.props.odds}
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={8} className={classes.percentGridItem}>
-          <div className={classes.percentBar} style={{ width: `${this.props.probability}%` }}></div>
-          <Typography variant="subtitle1" display="inline" className={classes.percentText}>
-            {this.props.probability}%
-          </Typography>
+        <Grid item xs={12} md={8} className={classes.percentGridItem}>
+          <div className={classes.percentBarContainer}>
+            <div className={classes.percentBar} style={{ width: `${this.props.probability}%` }}></div>
+            <Typography variant="subtitle1" display="inline" className={classes.percentLabel}>
+              {this.props.probability}%
+            </Typography>
+          </div>
         </Grid>
       </React.Fragment>
     )

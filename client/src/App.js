@@ -1,18 +1,30 @@
 import React from 'react'
 import { Container, Typography, Box } from '@material-ui/core/'
+import { makeStyles } from '@material-ui/core/styles'
 
-import OddsGrid from './components/OddsGrid'
+import OddsPickerGrid from './components/OddsPickerGrid'
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    paddingTop: theme.spacing(3),
+    [theme.breakpoints.up('md')]: {
+      paddingTop: theme.spacing(10)
+    }
+  },
+  heading: {
+    marginBottom: theme.spacing(3)
+  }
+}))
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <Container maxWidth="md">
-      <Typography variant="h4" style={{ marginTop: 25 }}>
+    <Container maxWidth="md" className={classes.container}>
+      <Typography variant="h4" className={classes.heading}>
         Politicodds
       </Typography>
-      <Typography variant="h5" style={{ marginTop: 30 }}>
-        Next Liberal Democrat Leader
-      </Typography>
-      <OddsGrid />
+      <OddsPickerGrid />
       <Box marginBottom={5}>
         {/* Footer */}
       </Box>
