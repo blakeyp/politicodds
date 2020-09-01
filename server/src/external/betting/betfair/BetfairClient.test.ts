@@ -81,7 +81,7 @@ describe('Betfair API client', () => {
       const mockRunnersResponse = {
         data: [
           {
-            marketId: '191918',
+            marketId: '191919',
             runners: [
               { selectionId: '001', runnerName: 'Runner 1' },
               { selectionId: '002', runnerName: 'Runner 2' },
@@ -112,12 +112,15 @@ describe('Betfair API client', () => {
   })
 
   describe('getPricesByMarket', () => {
-    test('returns list of best prices for each runner for the given market id', async () => {
-      const mockMarketId = '191919'
-      const mockPricesResponse = {
+    let mockMarketId: string
+    let mockPricesResponse: any
+
+    beforeEach(() => {
+      mockMarketId = '191919'
+      mockPricesResponse = {
         data: [
           {
-            marketId: '191918',
+            marketId: '191919',
             runners: [
               { selectionId: '001', ex: { availableToBack: [{ price: 1.23 }, { price: 1.25 }, { price: 1.19 }] } },
               { selectionId: '002', ex: { availableToBack: [{ price: 3.3 }, { price: 3.26363 }, { price: 2.9999 }] } },
@@ -126,7 +129,10 @@ describe('Betfair API client', () => {
           }
         ]
       }
-      mockHttpClient.post.mockResolvedValue(mockPricesResponse as any)
+    })
+
+    test('returns list of best prices for each runner for the given market id', async () => {
+      mockHttpClient.post.mockResolvedValue(mockPricesResponse)
 
       const result = await betfairClient.getPricesByMarket(mockMarketId)
 
@@ -138,9 +144,21 @@ describe('Betfair API client', () => {
         })
       )
       expect(result).toStrictEqual([
-        { runnerId: '001', price: 1.25 },
-        { runnerId: '002', price: 3.3 },
-        { runnerId: '003', price: 26 }
+        { runnerId: '001', value: 1.25 },
+        { runnerId: '002', value: 3.3 },
+        { runnerId: '003', value: 26 }
+      ])
+    })
+
+    test('filters out runners with no available price data', async () => {
+      mockPricesResponse.data[0].runners[1].ex.availableToBack = []
+      mockHttpClient.post.mockResolvedValue(mockPricesResponse)
+
+      const result = await betfairClient.getPricesByMarket(mockMarketId)
+
+      expect(result).toStrictEqual([
+        { runnerId: '001', value: 1.25 },
+        { runnerId: '003', value: 26 }
       ])
     })
   })

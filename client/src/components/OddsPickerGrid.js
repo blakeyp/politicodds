@@ -1,8 +1,16 @@
 import React from 'react'
+import Alert from '@material-ui/lab/Alert';
+import { withStyles } from '@material-ui/core/styles'
 
 import MarketPicker from './MarketPicker'
 import OddsGrid from './OddsGrid'
 import LoadingSpinner from './LoadingSpinner'
+
+const useStyles = theme => ({
+  alert: {
+    marginTop: theme.spacing(3)
+  },
+})
 
 class OddsPickerGrid extends React.Component {
   constructor(props) {
@@ -24,9 +32,10 @@ class OddsPickerGrid extends React.Component {
       .then(data => {
         this.setState({
           loading: false,
-          odds: data
+          odds: data.length > 0 && data
         })
       })
+      .catch(console.error)
   }
 
   fetchOdds(marketId) {
@@ -40,13 +49,18 @@ class OddsPickerGrid extends React.Component {
   }
 
   render() {
+    const { classes } = this.props
     return (
       <React.Fragment>
         <MarketPicker onChange={this.handleChange} />
-        {this.state.loading ? <LoadingSpinner /> : <OddsGrid odds={this.state.odds} />}
+        {
+          this.state.loading ? <LoadingSpinner /> :
+          this.state.odds ? <OddsGrid odds={this.state.odds} /> :
+          <Alert severity="error" className={classes.alert}>Oops! No odds data available for this market! Please try again later</Alert>
+        }
       </React.Fragment>
     )
   }
 }
 
-export default OddsPickerGrid
+export default withStyles(useStyles)(OddsPickerGrid)

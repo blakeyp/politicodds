@@ -1,5 +1,5 @@
 import { BettingClient } from '../external/betting'
-import { RunnerOdds } from '../domain/types'
+import { RunnerOdds, Runner } from '../domain/types'
 import Odds from '../domain/Odds'
 
 class OddsService {
@@ -12,9 +12,9 @@ class OddsService {
     const prices = await this.bettingClient.getPricesByMarket(marketId)
 
     // @Todo: encapsulate all logic in a RunnerOdds class incl. sort/slice (?)
-    let runnerOdds: RunnerOdds[] = runners.map(runner => {
-      const price = prices.find(r => r.runnerId === runner.id)?.price
-      const odds = new Odds(price as number)
+    let runnerOdds: RunnerOdds[] = prices.map(price => {
+      const runner = runners.find(r => r.id === price.runnerId) as Runner
+      const odds = new Odds(price.value)
       return {
         runnerName: runner.name,
         odds: odds.toFractional(),

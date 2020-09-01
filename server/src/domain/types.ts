@@ -21,7 +21,7 @@ export interface Runner {
 
 export interface Price {
   runnerId: number
-  price: number
+  value: number
 }
 
 export interface RunnerOdds {
