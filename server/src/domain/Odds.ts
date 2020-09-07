@@ -3,7 +3,7 @@ import decimalToFractionalMap from './odds-map'
 
 class Odds {
   constructor (
-    readonly decimalValue: number
+    private decimalValue: number
   ) {}
 
   toFractional (): string {

@@ -3,13 +3,14 @@ import HttpClient from '../../http/HttpClient'
 import { Event, Market, Runner, Price } from '../../../domain/types'
 import { EventsResponse, MarketsResponse, OddsResponse, RunnersResponse } from './types'
 import { EventType, ApiMethod } from './enums'
+import BetfairSession from './BetfairSession'
 
 class BetfairClient implements BettingClient {
   constructor (
-    private readonly apiUrl: string,
-    private readonly appKey: string,
-    private readonly sessionToken: string,
-    private readonly http: HttpClient
+    private apiUrl: string,
+    private appKey: string,
+    private session: BetfairSession,
+    private http: HttpClient
   ) {}
 
   async getPoliticsEvents (): Promise<Event[]> {
@@ -101,9 +102,10 @@ class BetfairClient implements BettingClient {
 
   private async callApi (method: ApiMethod, body: object): Promise<any> {
     const url = `${this.apiUrl}/${method}/`
+    const sessionToken = await this.session.getToken()
     const headers = {
       'X-Application': this.appKey,
-      'X-Authentication': this.sessionToken,
+      'X-Authentication': sessionToken.value,
       'Content-Type': 'application/json'
     }
     const response = await this.http.post(url, headers, body)

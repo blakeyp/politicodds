@@ -7,10 +7,14 @@ describe('Betfair API client', () => {
     post: jest.fn()
   }
 
+  const mockSession: any = {
+    getToken: () => ({ value: 'mock-token' })
+  }
+
   const betfairClient = new BetfairClient(
     'apiUrl',
     'appKey',
-    'sessionToken',
+    mockSession,
     mockHttpClient
   )
 
