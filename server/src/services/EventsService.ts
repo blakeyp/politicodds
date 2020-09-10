@@ -7,7 +7,7 @@ class EventsService {
   ) {}
 
   async getAll (): Promise<Event[]> {
-    return this.bettingClient.getPoliticsEvents()
+    return await this.bettingClient.getPoliticsEvents()
   }
 }
 

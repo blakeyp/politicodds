@@ -4,13 +4,13 @@ import { BettingClient } from '../external/betting'
 describe('Odds service', () => {
   const mockMarketId = 'mockMarketId'
   const mockBettingClient: Partial<BettingClient> = {
-    getRunnersByMarket: jest.fn(async () => Promise.resolve([
+    getRunnersByMarket: jest.fn(async () => await Promise.resolve([
       { id: 1, name: 'Runner 1' },
       { id: 2, name: 'Runner 2' },
       { id: 3, name: 'Runner 3' },
       { id: 4, name: 'Runner with no price data' }
     ])),
-    getPricesByMarket: jest.fn(async () => Promise.resolve([
+    getPricesByMarket: jest.fn(async () => await Promise.resolve([
       { runnerId: 2, value: 1.25 },
       { runnerId: 1, value: 2 },
       { runnerId: 3, value: 100 }

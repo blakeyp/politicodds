@@ -10,7 +10,7 @@ describe('Odds value object', () => {
 
   describe('toFractional', () => {
     describe('converts the odds to fractional format', () => {
-      type TestCase = [number, string];
+      type TestCase = [number, string]
       const testCases: TestCase[] = [
         // input, expected
         [1, '1/100'],

@@ -2,7 +2,7 @@ import config from '../../../config'
 import HttpClient from '../../http/HttpClient'
 
 class BetfairSession {
-  private token?: Token;
+  private token?: Token
 
   constructor (
     private http: HttpClient

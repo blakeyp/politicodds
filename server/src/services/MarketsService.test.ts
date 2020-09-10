@@ -10,7 +10,7 @@ describe('Markets service', () => {
   ]
 
   const mockBettingClient: Partial<BettingClient> = {
-    getMarketsByEvent: jest.fn(async () => Promise.resolve(mockMarkets))
+    getMarketsByEvent: jest.fn(async () => await Promise.resolve(mockMarkets))
   }
 
   const marketsService = new MarketsService(mockBettingClient as any)

@@ -10,10 +10,6 @@ export interface Market {
   name: string
 }
 
-interface MarketDetails extends Market {
-  foo: string
-}
-
 export interface Runner {
   id: number
   name: string

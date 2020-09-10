@@ -7,7 +7,7 @@ class MarketsService {
   ) {}
 
   async getByEvent (eventId: string): Promise<Market[]> {
-    return this.bettingClient.getMarketsByEvent(eventId)
+    return await this.bettingClient.getMarketsByEvent(eventId)
   }
 }
 
