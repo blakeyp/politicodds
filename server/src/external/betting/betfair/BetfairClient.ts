@@ -83,18 +83,19 @@ class BetfairClient implements BettingClient {
 
     const data: OddsResponse = await this.callApi(ApiMethod.listMarketBook, body)
 
-    // Map filtering out runners with no price data
+    // Map filtering out runners with no/unreliable price data
     const prices: Price[] = data[0].runners
       .flatMap(runner => {
-        const backBets = runner.ex.availableToBack // May be empty list
-        if (backBets.length > 0) {
-          const price = Math.max(...backBets.map(bet => bet.price))
-          return [{
-            runnerId: runner.selectionId,
-            value: price
-          }]
+        const backBets = runner.ex.availableToBack // May be empty list!
+        // Results with fewer than 3 back prices tend to be unreliable so exclude them
+        if (backBets.length < 3) {
+          return []
         }
-        return []
+        const price = Math.max(...backBets.map(bet => bet.price))
+        return [{
+          runnerId: runner.selectionId,
+          value: price
+        }]
       })
 
     return prices

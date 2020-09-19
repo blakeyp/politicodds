@@ -165,5 +165,17 @@ describe('Betfair API client', () => {
         { runnerId: '003', value: 26 }
       ])
     })
+
+    test('filters out runners with unreliable (< 3 back prices) price data', async () => {
+      mockPricesResponse.data[0].runners[1].ex.availableToBack = [{ price: 1.01 }, { price: 1.03 }]
+      mockHttpClient.post.mockResolvedValue(mockPricesResponse)
+
+      const result = await betfairClient.getPricesByMarket(mockMarketId)
+
+      expect(result).toStrictEqual([
+        { runnerId: '001', value: 1.25 },
+        { runnerId: '003', value: 26 }
+      ])
+    })
   })
 })
