@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Typography, Box } from '@material-ui/core/'
+import { Container, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import OddsPickerGrid from './components/OddsPickerGrid'

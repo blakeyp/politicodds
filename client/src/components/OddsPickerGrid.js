@@ -20,10 +20,17 @@ class OddsPickerGrid extends React.Component {
       odds: []
     }
 
-    this.handleChange = this.handleChange.bind(this)
+    this.handleCategoryChange = this.handleCategoryChange.bind(this)
+    this.handleMarketChange = this.handleMarketChange.bind(this)
   }
 
-  handleChange(selectedMarket) {
+  handleCategoryChange() {
+    this.setState({
+      odds: []
+    })
+  }
+
+  handleMarketChange(selectedMarket) {
     this.setState({
       loading: true
     })
@@ -52,7 +59,7 @@ class OddsPickerGrid extends React.Component {
     const { classes } = this.props
     return (
       <React.Fragment>
-        <MarketPicker onChange={this.handleChange} />
+        <MarketPicker onCategoryChange={this.handleCategoryChange} onMarketChange={this.handleMarketChange} />
         {
           this.state.loading ? <LoadingSpinner /> :
           this.state.odds ? <OddsGrid odds={this.state.odds} /> :

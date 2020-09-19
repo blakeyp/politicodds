@@ -31,6 +31,8 @@ class MarketPicker extends React.Component {
           selectMarketDisabled: false
         })
       })
+
+    this.props.onCategoryChange()
   }
 
   handleMarketChange(e) {
@@ -40,7 +42,7 @@ class MarketPicker extends React.Component {
       selectedMarket: marketId
     })
 
-    this.props.onChange(marketId)
+    this.props.onMarketChange(marketId)
   }
 
   componentDidMount() {
