@@ -2,36 +2,37 @@
 JSON REST API serving betting data for politics events, queried from the Betfair Exchange
 
 - `/markets` list of currently available (politics) markets
-- `/markets/{id}` object with metadata for a given market (id)
 - `/markets/{id}/runners` list of runners for a given market (id)
 - `/markets/{id}/odds` list of the best runner prices for a given market (id)
 
 ### Project structure
 ```
 src
-│   server.ts                  # server entry point
-│   app.ts                     # Express setup
-│   config.ts                  # config vars
-│   router.ts                  # route definitions
-└───controllers                # route controllers
+│   server.ts                    # server entry point
+│   app.ts                       # Express setup
+│   config.ts                    # config vars
+│   router.ts                    # route definitions
+└───controllers                  # route controllers
 │   │   markets.ts
 │   │   runners.ts
 │   │   odds.ts
-└───services                   # services behind each controller
-│   │   index.ts               # singleton export 'barrel'
+|   |   ...
+└───services                     # services behind each controller
+│   │   index.ts                 # singleton export 'barrel'
 │   │   MarketsService.ts
 │   │   ...
-└───external                   # external/third-party services
+└───external                     # external/third-party services
 │   └───http
-│       │   HttpClient.ts      # client for making http requests
+│       │   HttpClient.ts        # client for making http requests
 │       │   ...
 │   └───betting
-│       │   BettingClient.ts   # interface for generic client to betting API
-│       │   BetfairClient.ts   # implementation of BettingClient for Betfair
-│       │   ...
+│       │   BettingClient.ts     # interface for generic client to betting API
+|       └───betfair
+│       │      BetfairClient.ts  # implementation of BettingClient for Betfair
+│       │      ...
 ```
 
-### Patterns
+### Coding patterns
 
 #### Export barrel
 Each `index.ts` defines a 'barrel' module<sup>[1](#barrel)</sup> which instantiates and re-exports its directory's classes as singleton instances for external use.

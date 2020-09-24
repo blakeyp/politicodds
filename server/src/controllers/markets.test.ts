@@ -1,4 +1,4 @@
-import { getMarket, getMarketsByEvent } from './markets'
+import { getMarketsByEvent } from './markets'
 import { marketsService } from '../services'
 import MarketsService from '../services/MarketsService'
 
@@ -42,24 +42,6 @@ describe('Markets controller', () => {
       await getMarketsByEvent(req, res)
 
       expect(res.json).toHaveBeenCalledWith(mockMarkets)
-    })
-  })
-
-  describe('getMarket handler', () => {
-    it('responds with market details for the given id', async () => {
-      const mockMarketId = Symbol('mockMarketId')
-      req = {
-        params: {
-          id: mockMarketId
-        }
-      }
-
-      await getMarket(req, res)
-
-      expect(res.json).toHaveBeenCalledWith({
-        id: mockMarketId,
-        name: 'Market 1'
-      })
     })
   })
 })
