@@ -9,7 +9,7 @@ Calls the [Betfair Exchange API](https://developer.betfair.com/en/exchange-api/)
 
 #### Tech stack
 - Backend: Node.js/Express with TypeScript
-- Frontend: React
+- Frontend: React (using [create-react-app](https://github.com/facebook/create-react-app))
 
 #### Run locally
 To run the app locally, first in the `server` directory create a `.env` file based off the `.env.template` - you'll need a Betfair account registered with an application key for the Betfair Exchange API.
