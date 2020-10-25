@@ -2,6 +2,7 @@ import React from 'react'
 import Alert from '@material-ui/lab/Alert';
 import { withStyles } from '@material-ui/core/styles'
 
+import config from '../config'
 import MarketPicker from './MarketPicker'
 import OddsGrid from './OddsGrid'
 import LoadingSpinner from './LoadingSpinner'
@@ -46,7 +47,7 @@ class OddsPickerGrid extends React.Component {
   }
 
   fetchOdds(marketId) {
-    return fetch(`api/markets/${marketId}/odds?limit=10`)
+    return fetch(`${config.apiUrl}/markets/${marketId}/odds?limit=10`)
       .then(res => res.json())
       .then(data => {
         data.map(odds => odds.probability = (odds.probability * 100).toFixed(1))

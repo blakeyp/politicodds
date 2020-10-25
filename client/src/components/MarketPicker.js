@@ -1,6 +1,8 @@
 import React from 'react'
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
+import config from '../config'
+
 class MarketPicker extends React.Component {
   constructor(props) {
     super(props)
@@ -55,13 +57,13 @@ class MarketPicker extends React.Component {
   }
 
   fetchCategories() {
-    return fetch('api/events')
+    return fetch(`${config.apiUrl}/events`)
       .then(res => res.json())
       .catch(console.error)
   }
 
   fetchMarkets(categoryId) {
-    return fetch(`api/events/${categoryId}/markets`)
+    return fetch(`${config.apiUrl}/events/${categoryId}/markets`)
       .then(res => res.json())
       .catch(console.error)
   }
