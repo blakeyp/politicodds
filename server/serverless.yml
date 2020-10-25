@@ -1,0 +1,10 @@
+component: express
+name: test-politicodds
+stage: dev
+
+inputs:
+  src:
+    src: ./
+    exclude:
+      - src
+  region: eu-west-2

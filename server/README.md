@@ -5,6 +5,30 @@ JSON REST API serving betting data for politics events, queried from the Betfair
 - `/markets/{id}/runners` list of runners for a given market (id)
 - `/markets/{id}/odds` list of the best runner prices for a given market (id)
 
+### Deployment notes
+Deployment is using Serverless Express (on top of AWS Lambda/HTTP API) - https://github.com/serverless-components/express
+
+Install and build:
+```
+npm install
+npm run build
+```
+
+Prune dev dependencies:
+```
+npm prune --production
+```
+
+Deploy via `serverless` (needs installing globally with config set up):
+```
+serverless deploy
+```
+
+De-deploy:
+```
+serverless remove
+```
+
 ### Project structure
 ```
 src
