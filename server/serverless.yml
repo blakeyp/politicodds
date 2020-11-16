@@ -1,0 +1,13 @@
+component: express
+name: politicodds
+stage: prod
+
+inputs:
+  description: Politicodds API
+  src:
+    src: ./
+    exclude:
+      - src
+  env:
+    NODE_ENV: production
+  region: eu-west-2

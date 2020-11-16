@@ -1,11 +1,25 @@
 import express from 'express'
+import cors, { CorsOptions } from 'cors'
+import config from './config'
 import router from './router'
 
-const app = express()
-app.get('/', (req, res) => {
-  res.send('Hello world!')
-})
+// In prod only allow calls from set domains
+let corsOptions: CorsOptions = { origin: '*' }
+if (config.env === 'production') {
+  const allowedOrigins = [/\.politicodds\.co\.uk$/, /--politicodds\.netlify\.app$/]
+  corsOptions = {
+    origin: (origin: string | undefined, callback: Function) => {
+      if (origin && allowedOrigins.some(regex => regex.test(origin))) {
+        callback(null, true)
+      } else {
+        callback(new Error('Origin not allowed by CORS'))
+      }
+    }
+  }
+}
 
+const app = express()
+app.use(cors(corsOptions))
 app.use('/api', router)
 
 export default app

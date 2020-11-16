@@ -1,9 +1,9 @@
 ## Politicodds backend
 JSON REST API serving betting data for politics events, queried from the Betfair Exchange
 
-- `/markets` list of currently available (politics) markets
-- `/markets/{id}/runners` list of runners for a given market (id)
-- `/markets/{id}/odds` list of the best runner prices for a given market (id)
+- `/events` list of (politics) events/categories
+- `/events/{id}/markets` list of currently open markets for the given event (id)
+- `/markets/{id}/odds` list of best available runner prices for the given market (id) in decimal format
 
 ### Project structure
 ```
@@ -36,7 +36,7 @@ src
 
 #### Export barrel
 Each `index.ts` defines a 'barrel' module<sup>[1](#barrel)</sup> which instantiates and re-exports its directory's classes as singleton instances for external use.
-This aids maintaining singletons with dependency injection and crucially makes imports much cleaner:
+This aids maintaining singletons with dependency injection and makes imports cleaner:
 ```
 import { serviceA, serviceB } from '../services'
 ```

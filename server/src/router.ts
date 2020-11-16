@@ -6,6 +6,8 @@ import { getOddsByMarket } from './controllers/odds'
 
 const router = express.Router()
 
+router.get('/', (req, res) => res.send('Hello world! This API is running nicely!'))
+
 router.get('/events', errorHandler(getEvents))
 router.get('/events/:id/markets', errorHandler(getMarketsByEvent))
 router.get('/markets/:id/odds', errorHandler(getOddsByMarket))
