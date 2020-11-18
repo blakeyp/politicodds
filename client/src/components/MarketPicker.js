@@ -2,11 +2,14 @@ import React from 'react'
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 
 import config from '../config'
+import LoadingSpinner from './LoadingSpinner'
 
 class MarketPicker extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
+      error: false,
       categories: [],
       markets: [],
       selectedCategory: '',
@@ -33,6 +36,7 @@ class MarketPicker extends React.Component {
           selectMarketDisabled: false
         })
       })
+      .catch(this.props.onError)
 
     this.props.onCategoryChange()
   }
@@ -51,47 +55,52 @@ class MarketPicker extends React.Component {
     this.fetchCategories()
       .then(data => {
         this.setState({
+          loading: false,
           categories: data
         })
       })
+      .catch(this.props.onError)
   }
 
   fetchCategories() {
     return fetch(`${config.apiUrl}/events`)
       .then(res => res.json())
-      .catch(console.error)
   }
 
   fetchMarkets(categoryId) {
     return fetch(`${config.apiUrl}/events/${categoryId}/markets`)
       .then(res => res.json())
-      .catch(console.error)
   }
 
   render() {
     return (
-      <Grid container spacing={2} direction="row" justify="flex-start" alignItems="flex-start">
-        <Grid item xs={12} md={6}>
-        <FormControl style={{ width: '100%' }}>
-          <InputLabel id="select-category-label">Choose a category</InputLabel>
-          <Select labelId="select-category-label" id="select-category" value={this.state.selectedCategory} onChange={this.handleCategoryChange}>
-            {this.state.categories.map((category, index) => (
-              <MenuItem key={index} value={category.id}>{category.name}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <React.Fragment>
+      {
+        this.state.loading ? <LoadingSpinner /> :
+        <Grid container spacing={2} direction="row" justify="flex-start" alignItems="flex-start">
+          <Grid item xs={12} md={6}>
+          <FormControl style={{ width: '100%' }}>
+            <InputLabel id="select-category-label">Choose a category</InputLabel>
+            <Select labelId="select-category-label" id="select-category" value={this.state.selectedCategory} onChange={this.handleCategoryChange}>
+              {this.state.categories.map((category, index) => (
+                <MenuItem key={index} value={category.id}>{category.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          </Grid>
+          <Grid item xs={12} md={6}>
+          <FormControl style={{ width: '100%' }} disabled={this.state.selectMarketDisabled}>
+            <InputLabel id="select-market-label">Choose a market</InputLabel>
+            <Select labelId="select-market-label" id="select-market" value={this.state.selectedMarket} onChange={this.handleMarketChange}>
+              {this.state.markets.map((market, index) => (
+                <MenuItem key={index} value={market.id}>{market.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-        <FormControl style={{ width: '100%' }} disabled={this.state.selectMarketDisabled}>
-          <InputLabel id="select-market-label">Choose a market</InputLabel>
-          <Select labelId="select-market-label" id="select-market" value={this.state.selectedMarket} onChange={this.handleMarketChange}>
-            {this.state.markets.map((market, index) => (
-              <MenuItem key={index} value={market.id}>{market.name}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        </Grid>
-      </Grid>
+      }
+      </React.Fragment>
     )
   }
 }

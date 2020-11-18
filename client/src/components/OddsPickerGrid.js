@@ -18,11 +18,13 @@ class OddsPickerGrid extends React.Component {
     super(props)
     this.state = {
       loading: false,
+      error: false,
       odds: []
     }
 
     this.handleCategoryChange = this.handleCategoryChange.bind(this)
     this.handleMarketChange = this.handleMarketChange.bind(this)
+    this.handleError = this.handleError.bind(this)
   }
 
   handleCategoryChange() {
@@ -43,7 +45,13 @@ class OddsPickerGrid extends React.Component {
           odds: data.length > 0 && data
         })
       })
-      .catch(console.error)
+      .catch(this.handleError)
+  }
+
+  handleError() {
+    this.setState({
+      error: true
+    })
   }
 
   fetchOdds(marketId) {
@@ -53,18 +61,24 @@ class OddsPickerGrid extends React.Component {
         data.map(odds => odds.probability = (odds.probability * 100).toFixed(1))
         return data
       })
-      .catch(console.error)
   }
 
   render() {
     const { classes } = this.props
+
+    if (this.state.error) {
+      return (
+        <Alert severity="error" className={classes.alert}>Oops! An error has occurred retrieving the data! Please try again later</Alert>
+      )
+    }
+
     return (
       <React.Fragment>
-        <MarketPicker onCategoryChange={this.handleCategoryChange} onMarketChange={this.handleMarketChange} />
+        <MarketPicker onCategoryChange={this.handleCategoryChange} onMarketChange={this.handleMarketChange} onError={this.handleError}/>
         {
           this.state.loading ? <LoadingSpinner /> :
           this.state.odds ? <OddsGrid odds={this.state.odds} /> :
-          <Alert severity="error" className={classes.alert}>Oops! No odds data available for this market! Please try again later</Alert>
+          <Alert severity="warning" className={classes.alert}>Oops! No odds data available for this market! Please try again later</Alert>
         }
       </React.Fragment>
     )
