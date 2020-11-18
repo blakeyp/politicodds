@@ -1,4 +1,4 @@
-import { parseLimit } from './query'
+import { parseLimit } from '../../src/utils/query'
 
 describe('Query helper', () => {
   describe('parseLimit', () => {

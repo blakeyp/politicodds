@@ -1,4 +1,4 @@
-import BetfairSession from './BetfairSession'
+import BetfairSession from '../../../src/external/betfair/BetfairSession'
 
 describe('Betfair Session', () => {
   const mockTokenResponse = (tokenValue: string): object => ({

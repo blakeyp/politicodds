@@ -1,5 +1,5 @@
 import express from 'express'
-import { errorHandler } from './controllers/error-handler'
+import { errorHandler } from './controllers/error/error-handler'
 import { getEvents } from './controllers/events'
 import { getMarketsByEvent } from './controllers/markets'
 import { getOddsByMarket } from './controllers/odds'

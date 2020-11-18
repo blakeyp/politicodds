@@ -1,0 +1,5 @@
+// Separate config for the linter, to include test files
+{
+  "extends": "./tsconfig.json",
+  "include": ["src", "test"]
+}

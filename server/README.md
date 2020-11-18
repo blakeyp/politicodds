@@ -17,6 +17,10 @@ src
 │   │   runners.ts
 │   │   odds.ts
 |   |   ...
+└───domain                       # business domain types/logic
+│   │   BettingClient.ts         # interface for generic client to a betting API
+│   │   Odds.ts                  # value object to represent odds incl. conversion logic
+│   │   ...
 └───services                     # services behind each controller
 │   │   index.ts                 # singleton export 'barrel'
 │   │   MarketsService.ts
@@ -25,11 +29,9 @@ src
 │   └───http
 │       │   HttpClient.ts        # client for making http requests
 │       │   ...
-│   └───betting
-│       │   BettingClient.ts     # interface for generic client to betting API
-|       └───betfair
-│       │      BetfairClient.ts  # implementation of BettingClient for Betfair
-│       │      ...
+│   └───betfair
+│       │   BetfairClient.ts     # implementation of BettingClient for Betfair API
+│       │   ...
 ```
 
 ### Coding patterns
@@ -69,7 +71,11 @@ SomeController -> BetfairClient (impl)
 SomeController -> BettingClient (interface) <- BetfairClient (impl)
 ```
 
+### Value objects
+Value objects in *Domain Driven Design* are "small objects that represent simple entities whose equality is not based on identity". They can be thought of as an extension of primitive types such as number or string and can be used to neatly encapsulate domain logic in a single place<sup>[4](#vos)</sup>. For example, here an `Odds` value object is used to represent an odds value and encapsulate the conversion logic, between different formats decimal/fractional/percent. This prevents this kind of domain logic from leaking into the controller/infrastructure level code where it doesn't belong.
+
 #### References
 1. <a name="barrel"></a> https://basarat.gitbook.io/typescript/main-1/barrel
 2. <a name="ioc"></a> https://khalilstemmler.com/articles/software-design-architecture/coding-without-di-container/
 3. <a name="dip"></a> https://stackoverflow.com/questions/62539/what-is-the-dependency-inversion-principle-and-why-is-it-important
+4. <a name="vos"></a> https://medium.com/swlh/value-objects-to-the-rescue-28c563ad97c6

@@ -1,4 +1,4 @@
-import math from './math'
+import math from '../../src/utils/math'
 
 describe('Math helper', () => {
   describe('findClosestNumberInArray', () => {

@@ -1,5 +1,5 @@
-import config from '../../../config'
-import HttpClient from '../../http/HttpClient'
+import config from '../../config'
+import HttpClient from '../http/HttpClient'
 
 class BetfairSession {
   private token?: Token

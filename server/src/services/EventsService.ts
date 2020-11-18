@@ -1,4 +1,4 @@
-import { BettingClient } from '../external/betting'
+import BettingClient from '../domain/BettingClient'
 import { Event } from '../domain/types'
 
 class EventsService {

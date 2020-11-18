@@ -1,8 +1,8 @@
-import { getMarketsByEvent } from './markets'
-import { marketsService } from '../services'
-import MarketsService from '../services/MarketsService'
+import { getMarketsByEvent } from '../../src/controllers/markets'
+import { marketsService } from '../../src/services'
+import MarketsService from '../../src/services/MarketsService'
 
-jest.mock('../services', () => {
+jest.mock('../../src/services', () => {
   return {
     marketsService: {
       getByEvent: jest.fn()

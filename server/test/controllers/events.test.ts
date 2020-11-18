@@ -1,8 +1,8 @@
-import { getEvents } from './events'
-import { eventsService } from '../services'
-import EventsService from '../services/EventsService'
+import { getEvents } from '../../src/controllers/events'
+import { eventsService } from '../../src/services'
+import EventsService from '../../src/services/EventsService'
 
-jest.mock('../services', () => {
+jest.mock('../../src/services', () => {
   return {
     eventsService: {
       getAll: jest.fn()

@@ -1,5 +1,5 @@
-import EventsService from './EventsService'
-import { BettingClient } from '../external/betting'
+import EventsService from '../../src/services/EventsService'
+import BettingClient from '../../src/domain/BettingClient'
 
 describe('Events service', () => {
   const mockEvents = [

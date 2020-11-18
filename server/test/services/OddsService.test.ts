@@ -1,5 +1,5 @@
-import OddsService from './OddsService'
-import { BettingClient } from '../external/betting'
+import OddsService from '../../src/services/OddsService'
+import BettingClient from '../../src/domain/BettingClient'
 
 describe('Odds service', () => {
   const mockMarketId = 'mockMarketId'

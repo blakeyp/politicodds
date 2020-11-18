@@ -1,5 +1,5 @@
-import BetfairClient from './BetfairClient'
-import HttpClient from '../../http/HttpClient'
+import BetfairClient from '../../../src/external/betfair/BetfairClient'
+import HttpClient from '../../../src/external/http/HttpClient'
 
 describe('Betfair API client', () => {
   const mockHttpClient: jest.Mocked<HttpClient> = {

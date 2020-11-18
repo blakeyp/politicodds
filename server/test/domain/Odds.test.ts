@@ -1,4 +1,4 @@
-import Odds from './Odds'
+import Odds from '../../src/domain/Odds'
 
 describe('Odds value object', () => {
   test('can be instantiated with a decimal odds value', () => {

@@ -1,4 +1,4 @@
-import { Event, Market, Runner, Price } from './../../domain/types'
+import { Event, Market, Runner, Price } from './types'
 
 interface BettingClient {
   getPoliticsEvents: () => Promise<Event[]>

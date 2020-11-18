@@ -8,6 +8,7 @@ inputs:
     src: ./
     exclude:
       - src
+      - test
   env:
     NODE_ENV: production
   region: eu-west-2

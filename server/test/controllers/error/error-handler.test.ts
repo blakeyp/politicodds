@@ -1,5 +1,5 @@
-import { errorHandler } from './error-handler'
-import { ApplicationError } from './errors'
+import { errorHandler } from '../../../src/controllers/error/error-handler'
+import { ApplicationError } from '../../../src/controllers/error/errors'
 
 describe('Error handler', () => {
   const restoredConsoleError = console.error

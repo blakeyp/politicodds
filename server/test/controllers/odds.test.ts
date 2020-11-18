@@ -1,8 +1,8 @@
-import { getOddsByMarket } from './odds'
-import { oddsService } from '../services'
-import OddsService from '../services/OddsService'
+import { getOddsByMarket } from '../../src/controllers/odds'
+import { oddsService } from '../../src/services'
+import OddsService from '../../src/services/OddsService'
 
-jest.mock('../services', () => {
+jest.mock('../../src/services', () => {
   return {
     oddsService: {
       getByMarket: jest.fn()
