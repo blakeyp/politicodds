@@ -68,7 +68,7 @@ class OddsPickerGrid extends React.Component {
 
     if (this.state.error) {
       return (
-        <Alert severity="error" className={classes.alert}>Oops! An error has occurred retrieving the data! Please try again later</Alert>
+        <Alert severity="error" className={classes.alert}>Oops! An error has occurred retrieving the latest data! Please try again later</Alert>
       )
     }
 

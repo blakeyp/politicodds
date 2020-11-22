@@ -1,8 +1,9 @@
 import React from 'react'
-import { Container, Typography, Box } from '@material-ui/core'
+import { Container, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import OddsPickerGrid from './components/OddsPickerGrid'
+import Header from './components/Header'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -11,8 +12,8 @@ const useStyles = makeStyles(theme => ({
       paddingTop: theme.spacing(10)
     }
   },
-  heading: {
-    marginBottom: theme.spacing(3)
+  footer: {
+    marginBottom: theme.spacing(5),
   }
 }))
 
@@ -21,13 +22,9 @@ function App() {
 
   return (
     <Container maxWidth="md" className={classes.container}>
-      <Typography variant="h4" className={classes.heading}>
-        Politicodds
-      </Typography>
+      <Header />
       <OddsPickerGrid />
-      <Box marginBottom={5}>
-        {/* Footer */}
-      </Box>
+      <Box className={classes.footer}></Box>
     </Container>
   )
 }
