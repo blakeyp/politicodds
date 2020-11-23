@@ -86,7 +86,7 @@ function Header() {
             Politicodds uses the latest betting odds data from the <Link href="https://www.betfair.com/exchange" target="_blank" rel="noreferrer">Betfair Exchange</Link> to give estimated probabilities for political events.
           </Typography>
           <Typography gutterBottom>
-            All odds are presented in UK standard fractional format together with % implied probability <span style={{ fontStyle: 'italic' }}>1/decimal price * 100</span>. This is using an average of the current back prices on the Betfair Exchange.
+            All odds are presented in UK standard fractional format together with % implied probability <span style={{ fontStyle: 'italic' }}>1/decimal price * 100</span>. This is using the best available back price on the Betfair Exchange.
           </Typography>
           <Typography style={{ fontWeight: 'bold' }} gutterBottom>
             Why?
