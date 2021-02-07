@@ -1,3 +1,5 @@
+// Linter is expecting void return on Promise<void> handlers
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import express from 'express'
 import { errorHandler } from './controllers/error/error-handler'
 import { getEvents } from './controllers/events'
