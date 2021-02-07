@@ -1,5 +1,5 @@
 component: express
-name: politicodds
+name: politicodds-v2
 stage: prod
 
 inputs:
