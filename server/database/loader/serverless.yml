@@ -1,0 +1,16 @@
+service: politicodds-db-loader
+
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: nodejs12.x
+  stage: prod
+
+package:
+  include: ['../../dist/**']
+
+functions:
+  cron:
+    handler: dist/loader/handler.default
+    events:
+      - schedule: rate(5 minutes)

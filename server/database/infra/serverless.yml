@@ -1,0 +1,17 @@
+component: aws-dynamodb
+name: politicodds-db
+stage: prod
+
+inputs:
+  name: politicodds-db
+  attributeDefinitions:
+    - AttributeName: marketId
+      AttributeType: S
+    - AttributeName: timestamp
+      AttributeType: S
+  keySchema:
+    - AttributeName: marketId
+      KeyType: HASH
+    - AttributeName: timestamp
+      KeyType: RANGE
+  region: eu-west-2
