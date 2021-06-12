@@ -10,8 +10,10 @@ if (config.env === 'production') {
   corsOptions = {
     origin: (origin: string | undefined, callback: Function) => {
       if (origin && allowedOrigins.some(regex => regex.test(origin))) {
+        console.log('CORS origin alllowed:', origin)
         callback(null, true)
       } else {
+        console.warn('CORS origin not allowed:', origin)
         callback(new Error('Origin not allowed by CORS'))
       }
     }
