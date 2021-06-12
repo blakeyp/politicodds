@@ -11,4 +11,9 @@ inputs:
       - test
   env:
     NODE_ENV: production
+    BETFAIR_API_URL: ${env:BETFAIR_API_URL}
+    BETFAIR_SESSION_URL: ${env:BETFAIR_SESSION_URL}
+    BETFAIR_APP_KEY: ${env:BETFAIR_APP_KEY}
+    BETFAIR_USERNAME: ${env:BETFAIR_USERNAME}
+    BETFAIR_PASSWORD: ${env:BETFAIR_PASSWORD}
   region: eu-west-2
