@@ -1,10 +1,12 @@
 import BettingClient from '../domain/BettingClient'
-import { RunnerOdds, Runner } from '../domain/types'
+import { RunnerOdds, Runner, Timeframe, OddsTimeseries } from '../domain/types'
 import Odds from '../domain/Odds'
+import BettingRepository from '../repository/BettingRepository'
 
 class OddsService {
   constructor (
-    private bettingClient: BettingClient
+    private bettingClient: BettingClient,
+    private bettingRepository: BettingRepository
   ) {}
 
   async getByMarket (marketId: string, limit?: number): Promise<RunnerOdds[]> {
@@ -30,6 +32,22 @@ class OddsService {
     }
 
     return runnerOdds
+  }
+
+  async getTimeseriesByMarket (marketId: string, limit?: number, timeframe?: Timeframe): Promise<OddsTimeseries[]> {
+    const runnerPrices = await this.bettingRepository.readPrices(marketId, {
+      start: '2021-03-25',
+      end: '2021-05-07'
+    })
+
+    return runnerPrices.map((price) => ({
+      timestamp: price.timestamp,
+      runnerOdds: price.prices.map((p) => ({
+        runnerName: p.runner,
+        odds: new Odds(p.price).toFractional(),
+        probability: new Odds(p.price).toImpliedProbability(),
+      }))
+    }))
   }
 }
 

@@ -25,3 +25,13 @@ export interface RunnerOdds {
   odds: string // Fractional value
   probability: number // Implied prob. (decimal)
 }
+
+export interface Timeframe {
+  start: string
+  end: string
+}
+
+export interface OddsTimeseries {
+  timestamp: string
+  runnerOdds: RunnerOdds[]
+}

@@ -7,10 +7,12 @@ provider:
   stage: prod
 
 package:
-  include: ['../../dist/**']
+  include: ['../../**']
+  exclude: ['../../src/**', '../../test/**']
 
 functions:
   cron:
     handler: dist/loader/handler.default
+    timeout: 30
     events:
-      - schedule: rate(5 minutes)
+      - schedule: cron(0 12 * * ? *)
