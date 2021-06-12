@@ -21,7 +21,7 @@ class BetfairSession {
       'X-Application': config.betfair.appKey,
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-    const body = `username=${config.betfair.username}&password=${config.betfair.password}`
+    const body = `username=${config.betfair.username}&password=${encodeURIComponent(config.betfair.password)}`
     const response = await this.http.post(
       config.betfair.sessionUrl,
       headers,
