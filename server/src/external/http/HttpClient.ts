@@ -1,13 +1,13 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosRequestHeaders, AxiosResponse } from 'axios'
 
 class HttpClient {
-  async get (endpoint: string, headers: object): Promise<AxiosResponse> {
-    const response = await axios.get(endpoint, { headers })
+  async get <T>(endpoint: string, headers: AxiosRequestHeaders): Promise<AxiosResponse<T>> {
+    const response = await axios.get<T>(endpoint, { headers })
     return response
   }
 
-  async post (endpoint: string, headers: object, body: object | string): Promise<AxiosResponse> {
-    const response = await axios.post(endpoint, body, { headers })
+  async post <T>(endpoint: string, headers: AxiosRequestHeaders, body: object | string): Promise<AxiosResponse<T>> {
+    const response = await axios.post<T>(endpoint, body, { headers })
     return response
   }
 }
